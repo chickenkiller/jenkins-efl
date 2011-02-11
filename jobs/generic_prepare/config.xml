@@ -18,6 +18,11 @@
               <string>eet</string>
               <string>evas</string>
               <string>ecore</string>
+              <string>embryo</string>
+              <string>edje</string>
+              <string>efreet</string>
+              <string>e_dbus</string>
+              <string>elementary</string>
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
