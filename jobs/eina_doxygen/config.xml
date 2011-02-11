@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Doxygen generation of Eina library.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>mkdir -p $WORKSPACE/build
+cd $WORKSPACE/build
+
+$HUDSON_HOME/jobs/eina/workspace/eina/configure --prefix=$HUDSON_HOME/jobs/install --enable-doc
+
+make doc
+
+cd $HUDSON_HOME/jobs/eina/workspace/eina/doc
+sed &quot;s|^OUTPUT_DIRECTORY.*|OUTPUT_DIRECTORY = $PWD|&quot; Doxyfile &gt; $WORKSPACE/Doxyfile_for_jenkins
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.warnings.WarningsPublisher>
+      <healthy></healthy>
+      <unHealthy></unHealthy>
+      <thresholdLimit>low</thresholdLimit>
+      <pluginName>[WARNINGS] </pluginName>
+      <defaultEncoding></defaultEncoding>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds>
+        <unstableTotalAll></unstableTotalAll>
+        <unstableTotalHigh></unstableTotalHigh>
+        <unstableTotalNormal></unstableTotalNormal>
+        <unstableTotalLow></unstableTotalLow>
+        <unstableNewAll></unstableNewAll>
+        <unstableNewHigh></unstableNewHigh>
+        <unstableNewNormal></unstableNewNormal>
+        <unstableNewLow></unstableNewLow>
+        <failedTotalAll></failedTotalAll>
+        <failedTotalHigh></failedTotalHigh>
+        <failedTotalNormal></failedTotalNormal>
+        <failedTotalLow></failedTotalLow>
+        <failedNewAll></failedNewAll>
+        <failedNewHigh></failedNewHigh>
+        <failedNewNormal></failedNewNormal>
+        <failedNewLow></failedNewLow>
+      </thresholds>
+      <pattern></pattern>
+      <parserNames>
+        <string>Doxygen</string>
+      </parserNames>
+      <ignoreConsole>false</ignoreConsole>
+    </hudson.plugins.warnings.WarningsPublisher>
+    <hudson.plugins.doxygen.DoxygenArchiver>
+      <doxyfilePath>Doxyfile_for_jenkins</doxyfilePath>
+      <keepAll>false</keepAll>
+    </hudson.plugins.doxygen.DoxygenArchiver>
+  </publishers>
+  <buildWrappers/>
+</project>

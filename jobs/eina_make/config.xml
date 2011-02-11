@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Compilation of latest SVN revision of Eina library.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>mkdir -p $WORKSPACE/build
+cd $WORKSPACE/build
+export CFLAGS=&quot;-Wall -Wextra&quot;
+export CXXFLAGS=&quot;$CFLAGS&quot;
+$HUDSON_HOME/jobs/eina/workspace/eina/configure --prefix=$HUDSON_HOME/jobs/install --enable-tests
+make
+make check
+make install
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.warnings.WarningsPublisher>
+      <healthy></healthy>
+      <unHealthy></unHealthy>
+      <thresholdLimit>low</thresholdLimit>
+      <pluginName>[WARNINGS] </pluginName>
+      <defaultEncoding></defaultEncoding>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds>
+        <unstableTotalAll></unstableTotalAll>
+        <unstableTotalHigh></unstableTotalHigh>
+        <unstableTotalNormal></unstableTotalNormal>
+        <unstableTotalLow></unstableTotalLow>
+        <unstableNewAll></unstableNewAll>
+        <unstableNewHigh></unstableNewHigh>
+        <unstableNewNormal></unstableNewNormal>
+        <unstableNewLow></unstableNewLow>
+        <failedTotalAll></failedTotalAll>
+        <failedTotalHigh></failedTotalHigh>
+        <failedTotalNormal></failedTotalNormal>
+        <failedTotalLow></failedTotalLow>
+        <failedNewAll></failedNewAll>
+        <failedNewHigh></failedNewHigh>
+        <failedNewNormal></failedNewNormal>
+        <failedNewLow></failedNewLow>
+      </thresholds>
+      <pattern></pattern>
+      <parserNames>
+        <string>GNU compiler 4 (ld)</string>
+        <string>GNU compiler 4 (gcc)</string>
+      </parserNames>
+      <ignoreConsole>false</ignoreConsole>
+    </hudson.plugins.warnings.WarningsPublisher>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>eina_doxygen</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+  </publishers>
+  <buildWrappers/>
+</project>
