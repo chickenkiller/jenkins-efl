@@ -13,6 +13,7 @@ The additional plugins currently installed are:
 * http://wiki.jenkins-ci.org/display/JENKINS/Log+Parser+Plugin[Log Parser Plugin] (not used yet)
 * http://wiki.jenkins-ci.org/display/JENKINS/Parameterized+Trigger+Plugin[Parameterized Trigger Plugin]
 * http://wiki.jenkins-ci.org/display/JENKINS/Warnings+Plugin[Warnings Plugin]
+* http://wiki.hudson-ci.org/display/HUDSON/Task+Scanner+Plugin[Task Scanner Plugin]
 
 == Installation
 
