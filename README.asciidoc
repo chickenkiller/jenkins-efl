@@ -1,0 +1,55 @@
+Jenkins configuration for EFL build farm
+========================================
+Lionel Orry <lionel.orry@gmail.com>
+
+This repository contains the main configuration files and additional plugins
+needed to configure a http://jenkins-ci.org[Jenkins] instance so that
+'Continuous Integration' of the http://www.enlightenment.org[Enlightenment Foundation Libraries]
+is possible.
+
+The additional plugins currently installed are:
+
+* http://wiki.jenkins-ci.org/display/JENKINS/Doxygen+Plugin[Doxygen plugin]
+* http://wiki.jenkins-ci.org/display/JENKINS/Log+Parser+Plugin[Log Parser Plugin] (not used yet)
+* http://wiki.jenkins-ci.org/display/JENKINS/Parameterized+Trigger+Plugin[Parameterized Trigger Plugin]
+* http://wiki.jenkins-ci.org/display/JENKINS/Warnings+Plugin[Warnings Plugin]
+* http://wiki.hudson-ci.org/display/HUDSON/Task+Scanner+Plugin[Task Scanner Plugin]
+
+== Installation
+
+Damn easy to install it as a user.
+
+1. Clone this repository into `$HOME/.hudson`:
++
+-----
+$ cd $HOME
+$ mv .hudson .hudson_bak # In case you already used Hudson/Jenkins in your life
+$ git clone git://github.com/chickenkiller/jenkins-efl.git .hudson
+-----
+
+2. Download the jenkins war file (tested with v1.396):
++
+-----
+$ wget http://mirrors.jenkins-ci.org/war/latest/jenkins.war
+-----
+
+3. Start it
++
+-----
+$ java -jar jenkins.war
+-----
+
+4. Go visit http://localhost:8080/configure to add some environment variables:
+
+.. Check the *Environment variables* box in *Global properties* section
+.. Add `PATH` with value `$HUDSON_HOME/jobs/install/bin:$PATH`
+.. Add `PKG_CONFIG_PATH` with value `$HUDSON_HOME/jobs/install/lib/pkgconfig:$PKG_CONFIG_PATH`
+.. Add `LD_LIBRARY_PATH` with value `$HUDSON_HOME/jobs/install/lib:$LD_LIBRARY_PATH`
+.. Add any other variable you feel necessary on your system
+
+5. Go visit http://localhost:8080/, click on 'ENABLE AUTO REFRESH' and wait for the svn triggers to happen...
+
+== Remarks
+
+* For now, please forget about the `generic_*` targets. They are under development.
+

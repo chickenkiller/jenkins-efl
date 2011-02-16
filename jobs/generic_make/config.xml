@@ -39,7 +39,7 @@ make install</command>
       <canRunOnFailed>false</canRunOnFailed>
       <useDeltaValues>false</useDeltaValues>
       <thresholds>
-        <unstableTotalAll></unstableTotalAll>
+        <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
         <unstableTotalLow></unstableTotalLow>
@@ -48,7 +48,11 @@ make install</command>
         <unstableNewNormal></unstableNewNormal>
         <unstableNewLow></unstableNewLow>
         <failedTotalAll></failedTotalAll>
+<<<<<<< HEAD
         <failedTotalHigh></failedTotalHigh>
+=======
+        <failedTotalHigh>0</failedTotalHigh>
+>>>>>>> 700132c45762f69d1b00c39abfc56563def9b90b
         <failedTotalNormal></failedTotalNormal>
         <failedTotalLow></failedTotalLow>
         <failedNewAll></failedNewAll>

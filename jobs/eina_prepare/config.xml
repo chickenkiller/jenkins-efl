@@ -53,7 +53,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
       <canRunOnFailed>false</canRunOnFailed>
       <useDeltaValues>false</useDeltaValues>
       <thresholds>
-        <unstableTotalAll></unstableTotalAll>
+        <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
         <unstableTotalLow></unstableTotalLow>
@@ -62,7 +62,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
         <unstableNewNormal></unstableNewNormal>
         <unstableNewLow></unstableNewLow>
         <failedTotalAll></failedTotalAll>
-        <failedTotalHigh></failedTotalHigh>
+        <failedTotalHigh>0</failedTotalHigh>
         <failedTotalNormal></failedTotalNormal>
         <failedTotalLow></failedTotalLow>
         <failedNewAll></failedNewAll>
@@ -79,9 +79,15 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
     <hudson.tasks.BuildTrigger>
       <childProjects>eina_make</childProjects>
       <threshold>
+<<<<<<< HEAD
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
         <color>BLUE</color>
+=======
+        <name>UNSTABLE</name>
+        <ordinal>1</ordinal>
+        <color>YELLOW</color>
+>>>>>>> 700132c45762f69d1b00c39abfc56563def9b90b
       </threshold>
     </hudson.tasks.BuildTrigger>
   </publishers>

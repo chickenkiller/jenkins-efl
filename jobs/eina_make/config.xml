@@ -34,7 +34,7 @@ make install
       <canRunOnFailed>false</canRunOnFailed>
       <useDeltaValues>false</useDeltaValues>
       <thresholds>
-        <unstableTotalAll></unstableTotalAll>
+        <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
         <unstableTotalLow></unstableTotalLow>
@@ -43,7 +43,7 @@ make install
         <unstableNewNormal></unstableNewNormal>
         <unstableNewLow></unstableNewLow>
         <failedTotalAll></failedTotalAll>
-        <failedTotalHigh></failedTotalHigh>
+        <failedTotalHigh>0</failedTotalHigh>
         <failedTotalNormal></failedTotalNormal>
         <failedTotalLow></failedTotalLow>
         <failedNewAll></failedNewAll>
