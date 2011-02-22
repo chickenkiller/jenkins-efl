@@ -6,7 +6,11 @@
 - autoreconf&#xd;
 </description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
+  <properties>
+    <hudson.plugins.trac.TracProjectProperty>
+      <tracWebsite>http://trac.enlightenment.org/e/</tracWebsite>
+    </hudson.plugins.trac.TracProjectProperty>
+  </properties>
   <scm class="hudson.scm.SubversionSCM">
     <locations>
       <hudson.scm.SubversionSCM_-ModuleLocation>
@@ -14,6 +18,7 @@
         <local>evas</local>
       </hudson.scm.SubversionSCM_-ModuleLocation>
     </locations>
+    <browser class="hudson.plugins.trac.TracRepositoryBrowser"/>
     <excludedRegions></excludedRegions>
     <includedRegions></includedRegions>
     <excludedUsers></excludedUsers>
@@ -35,8 +40,8 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cd evas
-touch README
-autoreconf --warnings=all --install --verbose --force
+[ -f README ] || touch README
+NOCONFIGURE=1 ./autogen.sh
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>

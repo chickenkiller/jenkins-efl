@@ -7,6 +7,9 @@
 </description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.plugins.trac.TracProjectProperty>
+      <tracWebsite>http://trac.enlightenment.org/e/</tracWebsite>
+    </hudson.plugins.trac.TracProjectProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.ChoiceParameterDefinition>
@@ -36,6 +39,7 @@
         <local>.</local>
       </hudson.scm.SubversionSCM_-ModuleLocation>
     </locations>
+    <browser class="hudson.plugins.trac.TracRepositoryBrowser"/>
     <excludedRegions></excludedRegions>
     <includedRegions></includedRegions>
     <excludedUsers></excludedUsers>
@@ -52,7 +56,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command>[ -f README ] || touch README
-autoreconf --warnings=all --install --verbose --force
+NOCONFIGURE=1 ./autogen.sh
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>

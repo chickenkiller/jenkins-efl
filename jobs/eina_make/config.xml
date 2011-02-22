@@ -13,13 +13,11 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>mkdir -p $WORKSPACE/build
-cd $WORKSPACE/build
+      <command>rm -rf build &amp;&amp; mkdir -p build &amp;&amp; cd build
 export CFLAGS=&quot;-Wall -Wextra&quot;
 export CXXFLAGS=&quot;$CFLAGS&quot;
 $HUDSON_HOME/jobs/eina/workspace/eina/configure --prefix=$HUDSON_HOME/jobs/install --enable-tests
 make
-make check
 make install
 </command>
     </hudson.tasks.Shell>
@@ -58,14 +56,6 @@ make install
       </parserNames>
       <ignoreConsole>false</ignoreConsole>
     </hudson.plugins.warnings.WarningsPublisher>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>eina_doxygen</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers/>
 </project>

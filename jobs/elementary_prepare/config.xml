@@ -6,7 +6,11 @@
 - autoreconf&#xd;
 </description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
+  <properties>
+    <hudson.plugins.trac.TracProjectProperty>
+      <tracWebsite>http://trac.enlightenment.org/e/</tracWebsite>
+    </hudson.plugins.trac.TracProjectProperty>
+  </properties>
   <scm class="hudson.scm.SubversionSCM">
     <locations>
       <hudson.scm.SubversionSCM_-ModuleLocation>
@@ -14,6 +18,7 @@
         <local>elementary</local>
       </hudson.scm.SubversionSCM_-ModuleLocation>
     </locations>
+    <browser class="hudson.plugins.trac.TracRepositoryBrowser"/>
     <excludedRegions></excludedRegions>
     <includedRegions></includedRegions>
     <excludedUsers></excludedUsers>
@@ -35,8 +40,8 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cd elementary
-touch README
-autoreconf --warnings=all --install --verbose --force
+[ -f README ] || touch README
+NOCONFIGURE=1 ./autogen.sh
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -86,7 +91,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
       <canRunOnFailed>false</canRunOnFailed>
       <useDeltaValues>false</useDeltaValues>
       <thresholds>
-        <unstableTotalAll></unstableTotalAll>
+        <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
         <unstableTotalLow></unstableTotalLow>
@@ -95,7 +100,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
         <unstableNewNormal></unstableNewNormal>
         <unstableNewLow></unstableNewLow>
         <failedTotalAll></failedTotalAll>
-        <failedTotalHigh></failedTotalHigh>
+        <failedTotalHigh>0</failedTotalHigh>
         <failedTotalNormal></failedTotalNormal>
         <failedTotalLow></failedTotalLow>
         <failedNewAll></failedNewAll>

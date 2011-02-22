@@ -6,7 +6,11 @@
 - autoreconf&#xd;
 </description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
+  <properties>
+    <hudson.plugins.trac.TracProjectProperty>
+      <tracWebsite>http://trac.enlightenment.org/e/</tracWebsite>
+    </hudson.plugins.trac.TracProjectProperty>
+  </properties>
   <scm class="hudson.scm.SubversionSCM">
     <locations>
       <hudson.scm.SubversionSCM_-ModuleLocation>
@@ -14,6 +18,7 @@
         <local>eina</local>
       </hudson.scm.SubversionSCM_-ModuleLocation>
     </locations>
+    <browser class="hudson.plugins.trac.TracRepositoryBrowser"/>
     <excludedRegions></excludedRegions>
     <includedRegions></includedRegions>
     <excludedUsers></excludedUsers>
@@ -34,13 +39,19 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd $WORKSPACE/eina
-autoreconf --warnings=all --install --verbose --force
+      <command>cd eina
+[ -f README ] || touch README
+NOCONFIGURE=1 ./autogen.sh
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>svn revert $WORKSPACE/eina/doc/Makefile.am
 sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|latex\|man\|xml\)/,$(srcdir)/&amp;,g&apos; $WORKSPACE/eina/doc/Makefile.am</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command># correct rule for coverage
+sed -i &apos;s|directory $(top_srcdir)|directory $(top_builddir)|&apos; $WORKSPACE/eina/Makefile.am
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -77,17 +88,11 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
       <ignoreConsole>false</ignoreConsole>
     </hudson.plugins.warnings.WarningsPublisher>
     <hudson.tasks.BuildTrigger>
-      <childProjects>eina_make</childProjects>
+      <childProjects>eina_make, eina_doxygen, eina_coverage</childProjects>
       <threshold>
-<<<<<<< HEAD
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
         <color>BLUE</color>
-=======
-        <name>UNSTABLE</name>
-        <ordinal>1</ordinal>
-        <color>YELLOW</color>
->>>>>>> 700132c45762f69d1b00c39abfc56563def9b90b
       </threshold>
     </hudson.tasks.BuildTrigger>
   </publishers>
