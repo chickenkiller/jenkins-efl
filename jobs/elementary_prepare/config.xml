@@ -100,7 +100,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
         <unstableNewNormal></unstableNewNormal>
         <unstableNewLow></unstableNewLow>
         <failedTotalAll></failedTotalAll>
-        <failedTotalHigh>0</failedTotalHigh>
+        <failedTotalHigh></failedTotalHigh>
         <failedTotalNormal></failedTotalNormal>
         <failedTotalLow></failedTotalLow>
         <failedNewAll></failedNewAll>
