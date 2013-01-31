@@ -19,22 +19,22 @@ The additional plugins currently installed are:
 
 Damn easy to install it as a user.
 
-1. Clone this repository into `$HOME/.hudson`:
-+
+* Clone this repository into `$HOME/.hudson`:
+
 -----
 $ cd $HOME
 $ mv .hudson .hudson_bak # In case you already used Hudson/Jenkins in your life
 $ git clone git://github.com/chickenkiller/jenkins-efl.git .hudson
 -----
 
-2. Download the jenkins war file (tested with v1.396):
-+
+* Download the jenkins war file (tested with v1.396):
+
 -----
 $ wget http://mirrors.jenkins-ci.org/war/latest/jenkins.war
 -----
 
-3. Start it
-+
+* Start it
+
 -----
 $ java -jar jenkins.war
 -----
