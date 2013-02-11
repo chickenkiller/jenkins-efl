@@ -7,7 +7,7 @@
 </description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.trac.TracProjectProperty>
+    <hudson.plugins.trac.TracProjectProperty plugin="trac@1.10">
       <tracWebsite>http://trac.enlightenment.org/e/</tracWebsite>
     </hudson.plugins.trac.TracProjectProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -32,14 +32,14 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.scm.SubversionSCM">
+  <scm class="hudson.scm.SubversionSCM" plugin="subversion@1.23">
     <locations>
       <hudson.scm.SubversionSCM_-ModuleLocation>
         <remote>http://svn.enlightenment.org/svn/e/trunk/$EFL_LIB</remote>
         <local>.</local>
       </hudson.scm.SubversionSCM_-ModuleLocation>
     </locations>
-    <browser class="hudson.plugins.trac.TracRepositoryBrowser"/>
+    <browser class="hudson.plugins.trac.TracRepositoryBrowser" plugin="trac@1.10"/>
     <excludedRegions></excludedRegions>
     <includedRegions></includedRegions>
     <excludedUsers></excludedUsers>
@@ -53,6 +53,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>jobs/$JOB_NAME/workspace/$EFL_LIB</customWorkspace>
   <builders>
     <hudson.tasks.Shell>
       <command>[ -f README ] || touch README
@@ -65,7 +66,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.warnings.WarningsPublisher>
+    <hudson.plugins.warnings.WarningsPublisher plugin="warnings@3.14">
       <healthy></healthy>
       <unHealthy></unHealthy>
       <thresholdLimit>low</thresholdLimit>
@@ -73,7 +74,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
       <defaultEncoding></defaultEncoding>
       <canRunOnFailed>false</canRunOnFailed>
       <useDeltaValues>false</useDeltaValues>
-      <thresholds>
+      <thresholds plugin="analysis-core@1.17">
         <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
@@ -97,7 +98,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
       </parserNames>
       <ignoreConsole>false</ignoreConsole>
     </hudson.plugins.warnings.WarningsPublisher>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger>
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.6">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs>
@@ -110,5 +111,4 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
     </hudson.plugins.parameterizedtrigger.BuildTrigger>
   </publishers>
   <buildWrappers/>
-  <customWorkspace>jobs/$JOB_NAME/workspace/$EFL_LIB</customWorkspace>
 </project>

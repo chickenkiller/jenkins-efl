@@ -26,7 +26,7 @@ sed &quot;s|^OUTPUT_DIRECTORY.*|OUTPUT_DIRECTORY = $PWD|&quot; Doxyfile &gt; $WO
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.warnings.WarningsPublisher>
+    <hudson.plugins.warnings.WarningsPublisher plugin="warnings@3.14">
       <healthy></healthy>
       <unHealthy></unHealthy>
       <thresholdLimit>low</thresholdLimit>
@@ -34,7 +34,7 @@ sed &quot;s|^OUTPUT_DIRECTORY.*|OUTPUT_DIRECTORY = $PWD|&quot; Doxyfile &gt; $WO
       <defaultEncoding></defaultEncoding>
       <canRunOnFailed>false</canRunOnFailed>
       <useDeltaValues>false</useDeltaValues>
-      <thresholds>
+      <thresholds plugin="analysis-core@1.17">
         <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
@@ -58,7 +58,7 @@ sed &quot;s|^OUTPUT_DIRECTORY.*|OUTPUT_DIRECTORY = $PWD|&quot; Doxyfile &gt; $WO
       </parserNames>
       <ignoreConsole>false</ignoreConsole>
     </hudson.plugins.warnings.WarningsPublisher>
-    <hudson.plugins.doxygen.DoxygenArchiver>
+    <hudson.plugins.doxygen.DoxygenArchiver plugin="doxygen@0.6">
       <doxyfilePath>Doxyfile_for_jenkins</doxyfilePath>
       <keepAll>false</keepAll>
     </hudson.plugins.doxygen.DoxygenArchiver>

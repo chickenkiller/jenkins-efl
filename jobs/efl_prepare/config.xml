@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Preparation of latest SVN revision of EFL library:&#xd;
+- svn checkout&#xd;
+- autoreconf&#xd;
+</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.trac.TracProjectProperty plugin="trac@1.13">
+      <tracWebsite>http://trac.enlightenment.org/e/</tracWebsite>
+    </hudson.plugins.trac.TracProjectProperty>
+  </properties>
+  <scm class="hudson.scm.SubversionSCM" plugin="subversion@1.45">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>http://svn.enlightenment.org/svn/e/trunk/efl</remote>
+        <local>efl</local>
+        <depthOption>infinity</depthOption>
+        <ignoreExternalsOption>false</ignoreExternalsOption>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <browser class="hudson.plugins.trac.TracRepositoryBrowser" plugin="trac@1.13"/>
+    <excludedRegions></excludedRegions>
+    <includedRegions></includedRegions>
+    <excludedUsers></excludedUsers>
+    <excludedRevprop></excludedRevprop>
+    <excludedCommitMessages></excludedCommitMessages>
+    <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater"/>
+    <ignoreDirPropChanges>false</ignoreDirPropChanges>
+    <filterChangelog>false</filterChangelog>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>#every minute
+* * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>jobs/efl/workspace</customWorkspace>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cd efl
+NOCONFIGURE=1 ./autogen.sh
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#svn revert $WORKSPACE/efl/doc/Makefile.am
+#sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|latex\|man\|xml\)/,$(srcdir)/&amp;,g&apos; $WORKSPACE/efl/doc/Makefile.am</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command># correct rule for coverage
+#sed -i &apos;s|directory $(top_srcdir)|directory $(top_builddir)|&apos; $WORKSPACE/efl/Makefile.am
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

@@ -7,18 +7,18 @@
 </description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.trac.TracProjectProperty>
+    <hudson.plugins.trac.TracProjectProperty plugin="trac@1.10">
       <tracWebsite>http://trac.enlightenment.org/e/</tracWebsite>
     </hudson.plugins.trac.TracProjectProperty>
   </properties>
-  <scm class="hudson.scm.SubversionSCM">
+  <scm class="hudson.scm.SubversionSCM" plugin="subversion@1.23">
     <locations>
       <hudson.scm.SubversionSCM_-ModuleLocation>
         <remote>http://svn.enlightenment.org/svn/e/trunk/elementary</remote>
         <local>elementary</local>
       </hudson.scm.SubversionSCM_-ModuleLocation>
     </locations>
-    <browser class="hudson.plugins.trac.TracRepositoryBrowser"/>
+    <browser class="hudson.plugins.trac.TracRepositoryBrowser" plugin="trac@1.10"/>
     <excludedRegions></excludedRegions>
     <includedRegions></includedRegions>
     <excludedUsers></excludedUsers>
@@ -34,9 +34,11 @@
     <hudson.triggers.SCMTrigger>
       <spec>#every minute
 * * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>jobs/elementary/workspace</customWorkspace>
   <builders>
     <hudson.tasks.Shell>
       <command>cd elementary
@@ -50,7 +52,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.warnings.WarningsPublisher>
+    <hudson.plugins.warnings.WarningsPublisher plugin="warnings@3.14">
       <healthy></healthy>
       <unHealthy></unHealthy>
       <thresholdLimit>low</thresholdLimit>
@@ -58,7 +60,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
       <defaultEncoding></defaultEncoding>
       <canRunOnFailed>false</canRunOnFailed>
       <useDeltaValues>false</useDeltaValues>
-      <thresholds>
+      <thresholds plugin="analysis-core@1.17">
         <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
@@ -82,7 +84,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
       </parserNames>
       <ignoreConsole>false</ignoreConsole>
     </hudson.plugins.warnings.WarningsPublisher>
-    <hudson.plugins.tasks.TasksPublisher>
+    <hudson.plugins.tasks.TasksPublisher plugin="tasks@4.14">
       <healthy></healthy>
       <unHealthy></unHealthy>
       <thresholdLimit>low</thresholdLimit>
@@ -90,7 +92,7 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
       <defaultEncoding></defaultEncoding>
       <canRunOnFailed>false</canRunOnFailed>
       <useDeltaValues>false</useDeltaValues>
-      <thresholds>
+      <thresholds plugin="analysis-core@1.17">
         <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
@@ -125,5 +127,4 @@ sed -i &apos;s|$(efl_doxygen)|cd $(srcdir) \&amp;\&amp; &amp;|;s,\(img\|html\|la
     </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers/>
-  <customWorkspace>jobs/elementary/workspace</customWorkspace>
 </project>
