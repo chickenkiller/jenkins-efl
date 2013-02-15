@@ -9,6 +9,7 @@ is possible.
 
 The additional plugins currently installed are:
 
+* http://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin[Git plugin]
 * http://wiki.jenkins-ci.org/display/JENKINS/Doxygen+Plugin[Doxygen plugin]
 * http://wiki.jenkins-ci.org/display/JENKINS/Log+Parser+Plugin[Log Parser Plugin] (not used yet)
 * http://wiki.jenkins-ci.org/display/JENKINS/Parameterized+Trigger+Plugin[Parameterized Trigger Plugin]
