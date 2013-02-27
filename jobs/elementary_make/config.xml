@@ -25,7 +25,7 @@ make install
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.warnings.WarningsPublisher plugin="warnings@4.21">
+    <hudson.plugins.warnings.WarningsPublisher plugin="warnings@4.23">
       <healthy></healthy>
       <unHealthy></unHealthy>
       <thresholdLimit>low</thresholdLimit>
@@ -34,7 +34,7 @@ make install
       <canRunOnFailed>false</canRunOnFailed>
       <useStableBuildAsReference>false</useStableBuildAsReference>
       <useDeltaValues>false</useDeltaValues>
-      <thresholds plugin="analysis-core@1.48">
+      <thresholds plugin="analysis-core@1.49">
         <unstableTotalAll>0</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
