@@ -67,6 +67,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cd elementary
+sloccount --wide --details . &gt; ../sloccount.sc
 NOCONFIGURE=1 ./autogen.sh
 </command>
     </hudson.tasks.Shell>
@@ -80,6 +81,10 @@ NOCONFIGURE=1 ./autogen.sh
     </hudson.tasks.Shell>
   </builders>
   <publishers>
+    <hudson.plugins.sloccount.SloccountPublisher plugin="sloccount@1.8">
+      <pattern>sloccount.sc</pattern>
+      <encoding></encoding>
+    </hudson.plugins.sloccount.SloccountPublisher>
     <hudson.plugins.tasks.TasksPublisher plugin="tasks@4.35">
       <healthy></healthy>
       <unHealthy></unHealthy>
